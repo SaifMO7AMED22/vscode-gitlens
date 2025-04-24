@@ -4083,6 +4083,19 @@
 							"preview"
 						]
 					},
+					"gitlens.ai.ollama.url": {
+						"type": [
+							"string",
+							"null"
+						],
+						"default": null,
+						"markdownDescription": "Specifies the Ollama URL to use for access",
+						"scope": "window",
+						"order": 30,
+						"tags": [
+							"preview"
+						]
+					},
 					"gitlens.ai.openai.url": {
 						"type": [
 							"string",
@@ -4091,7 +4104,7 @@
 						"default": null,
 						"markdownDescription": "Specifies a custom URL to use for access to an OpenAI model via Azure. Azure URLs should be in the following format: https://{your-resource-name}.openai.azure.com/openai/deployments/{deployment-id}/chat/completions?api-version={api-version}",
 						"scope": "window",
-						"order": 30,
+						"order": 31,
 						"tags": [
 							"preview"
 						]
