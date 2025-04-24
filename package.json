@@ -6028,6 +6028,30 @@
 				"icon": "$(person-add)"
 			},
 			{
+				"command": "gitlens.ai.explainBranch",
+				"title": "Explain Branch (Preview)...",
+				"category": "GitLens"
+			},
+			{
+				"command": "gitlens.ai.explainChanges",
+				"title": "Explain Changes"
+			},
+			{
+				"command": "gitlens.ai.explainCommit",
+				"title": "Explain Commit",
+				"category": "GitLens"
+			},
+			{
+				"command": "gitlens.ai.explainStash",
+				"title": "Explain Stash (Preview)...",
+				"category": "GitLens"
+			},
+			{
+				"command": "gitlens.ai.explainWip",
+				"title": "Explain Working Changes (Preview)...",
+				"category": "GitLens"
+			},
+			{
 				"command": "gitlens.ai.generateChangelog",
 				"title": "Generate Changelog (Preview)...",
 				"category": "GitLens"
@@ -10329,6 +10353,26 @@
 				{
 					"command": "gitlens.addAuthors",
 					"when": "gitlens:enabled && !gitlens:readonly && !gitlens:untrusted && !gitlens:hasVirtualFolders"
+				},
+				{
+					"command": "gitlens.ai.explainBranch",
+					"when": "gitlens:enabled && !gitlens:readonly && !gitlens:untrusted && gitlens:gk:organization:ai:enabled"
+				},
+				{
+					"command": "gitlens.ai.explainChanges",
+					"when": "false"
+				},
+				{
+					"command": "gitlens.ai.explainCommit",
+					"when": "gitlens:enabled && !gitlens:readonly && !gitlens:untrusted && gitlens:gk:organization:ai:enabled"
+				},
+				{
+					"command": "gitlens.ai.explainStash",
+					"when": "gitlens:enabled && !gitlens:readonly && !gitlens:untrusted && gitlens:gk:organization:ai:enabled"
+				},
+				{
+					"command": "gitlens.ai.explainWip",
+					"when": "gitlens:enabled && !gitlens:readonly && !gitlens:untrusted && gitlens:gk:organization:ai:enabled"
 				},
 				{
 					"command": "gitlens.ai.generateChangelog",

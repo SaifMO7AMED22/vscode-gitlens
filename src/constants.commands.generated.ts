@@ -4,6 +4,7 @@
 export type ContributedCommands =
 	| ContributedKeybindingCommands
 	| ContributedPaletteCommands
+	| 'gitlens.ai.explainChanges'
 	| 'gitlens.annotations.nextChange'
 	| 'gitlens.annotations.previousChange'
 	| 'gitlens.computingFileAnnotations'
@@ -611,6 +612,10 @@ export type ContributedCommands =
 
 export type ContributedPaletteCommands =
 	| 'gitlens.addAuthors'
+	| 'gitlens.ai.explainBranch'
+	| 'gitlens.ai.explainCommit'
+	| 'gitlens.ai.explainStash'
+	| 'gitlens.ai.explainWip'
 	| 'gitlens.ai.generateChangelog'
 	| 'gitlens.ai.generateCommitMessage'
 	| 'gitlens.applyPatchFromClipboard'

@@ -23,6 +23,25 @@
 				]
 			}
 		},
+		"gitlens.ai.explainBranch": {
+			"label": "Explain Branch (Preview)...",
+			"commandPalette": "gitlens:enabled && !gitlens:readonly && !gitlens:untrusted && gitlens:gk:organization:ai:enabled"
+		},
+		"gitlens.ai.explainChanges": {
+			"label": "Explain Changes"
+		},
+		"gitlens.ai.explainCommit": {
+			"label": "Explain Commit",
+			"commandPalette": "gitlens:enabled && !gitlens:readonly && !gitlens:untrusted && gitlens:gk:organization:ai:enabled"
+		},
+		"gitlens.ai.explainStash": {
+			"label": "Explain Stash (Preview)...",
+			"commandPalette": "gitlens:enabled && !gitlens:readonly && !gitlens:untrusted && gitlens:gk:organization:ai:enabled"
+		},
+		"gitlens.ai.explainWip": {
+			"label": "Explain Working Changes (Preview)...",
+			"commandPalette": "gitlens:enabled && !gitlens:readonly && !gitlens:untrusted && gitlens:gk:organization:ai:enabled"
+		},
 		"gitlens.ai.generateChangelog": {
 			"label": "Generate Changelog (Preview)...",
 			"commandPalette": "gitlens:enabled && !gitlens:untrusted && gitlens:gk:organization:ai:enabled"
