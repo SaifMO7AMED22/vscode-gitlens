@@ -40,6 +40,7 @@ import { ReferencesQuickPickIncludes, showReferencePicker } from '../../../quick
 import { executeCommand, registerCommand } from '../../../system/-webview/command';
 import { configuration } from '../../../system/-webview/configuration';
 import { getContext, onDidChangeContext, setContext } from '../../../system/-webview/context';
+import { showMarkdownPreview } from '../../../system/-webview/markdown';
 import { gate } from '../../../system/decorators/-webview/gate';
 import { debug } from '../../../system/decorators/log';
 import type { Deferrable } from '../../../system/function/debounce';
@@ -832,6 +833,8 @@ export class PatchDetailsWebviewProvider
 			if (result == null) throw new Error('Error retrieving content');
 
 			params = { result: result.parsed };
+
+			void showMarkdownPreview(`${result.parsed.summary}\n\n${result.parsed.body}`);
 		} catch (ex) {
 			debugger;
 			params = { error: { message: ex.message } };

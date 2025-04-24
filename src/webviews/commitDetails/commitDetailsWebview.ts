@@ -56,6 +56,7 @@ import {
 } from '../../system/-webview/command';
 import { configuration } from '../../system/-webview/configuration';
 import { getContext, onDidChangeContext } from '../../system/-webview/context';
+import { showMarkdownPreview } from '../../system/-webview/markdown';
 import { debug } from '../../system/decorators/log';
 import type { Deferrable } from '../../system/function/debounce';
 import { debounce } from '../../system/function/debounce';
@@ -1134,6 +1135,8 @@ export class CommitDetailsWebviewProvider
 			if (result == null) throw new Error('Error retrieving content');
 
 			params = { result: result?.parsed };
+
+			void showMarkdownPreview(`${result.parsed.summary}\n\n${result.parsed.body}`);
 		} catch (ex) {
 			debugger;
 			params = { error: { message: ex.message } };
