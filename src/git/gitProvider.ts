@@ -312,6 +312,11 @@ export interface GitCommitsSubProvider {
 		rev?: string | undefined,
 		options?: { firstIfNotFound?: boolean | undefined },
 	): Promise<GitCommit | undefined>;
+	getCommitsForPath?(
+		repoPath: string,
+		uri: Uri,
+		options?: { all?: boolean; excludeReachableFrom?: string },
+	): Promise<string[]>;
 	getIncomingActivity?(repoPath: string, options?: IncomingActivityOptions): Promise<GitReflog | undefined>;
 	getInitialCommitSha?(repoPath: string): Promise<string | undefined>;
 	getLeftRightCommitCount(

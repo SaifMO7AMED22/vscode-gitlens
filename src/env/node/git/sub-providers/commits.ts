@@ -224,6 +224,27 @@ export class CommitsGitSubProvider implements GitCommitsSubProvider {
 	}
 
 	@log()
+	async getCommitsForPath(
+		repoPath: string,
+		uri: Uri,
+		options?: { all?: boolean; excludeReachableFrom?: string },
+	): Promise<string[]> {
+		const path = this.provider.getRelativePath(uri, repoPath);
+		const result = await this.git.exec(
+			{ cwd: repoPath },
+			'rev-list',
+			options?.all ? '--all' : undefined,
+			options?.excludeReachableFrom ? `^${options.excludeReachableFrom}` : undefined,
+			'--',
+			path,
+		);
+		const data = result.stdout.trim();
+		if (!data) return [];
+
+		return data.split('\n').filter(Boolean);
+	}
+
+	@log()
 	async getIncomingActivity(repoPath: string, options?: IncomingActivityOptions): Promise<GitReflog | undefined> {
 		const scope = getLogScope();
 
