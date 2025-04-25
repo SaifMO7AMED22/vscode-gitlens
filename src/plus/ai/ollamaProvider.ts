@@ -1,4 +1,4 @@
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken, Disposable } from 'vscode';
 import { window } from 'vscode';
 import { ollamaProviderDescriptor as provider } from '../../constants.ai';
 import { configuration } from '../../system/-webview/configuration';
@@ -7,6 +7,8 @@ import type { AIChatMessage, AIRequestResult } from './models/provider';
 import { OpenAICompatibleProvider } from './openAICompatibleProvider';
 
 type OllamaModel = AIModel<typeof provider.id>;
+
+const defaultBaseUrl = 'http://localhost:11434';
 
 export class OllamaProvider extends OpenAICompatibleProvider<typeof provider.id> {
 	readonly id = provider.id;
@@ -19,7 +21,7 @@ export class OllamaProvider extends OpenAICompatibleProvider<typeof provider.id>
 	override async configured(silent: boolean): Promise<boolean> {
 		// Ollama doesn't require an API key, but we'll check if the base URL is reachable
 		try {
-			const url = this.getBaseUrl();
+			const url = await this.getOrPromptBaseUrl(silent);
 			const rsp = await fetch(`${url}/api/tags`, {
 				headers: {
 					Accept: 'application/json',
@@ -89,9 +91,72 @@ export class OllamaProvider extends OpenAICompatibleProvider<typeof provider.id>
 		return [];
 	}
 
+	private async getOrPromptBaseUrl(silent: boolean): Promise<string> {
+		let url = configuration.get('ai.ollama.url') ?? undefined;
+		if (url) return url;
+
+		if (silent) return defaultBaseUrl;
+
+		const input = window.createInputBox();
+		input.ignoreFocusOut = true;
+
+		const disposables: Disposable[] = [];
+
+		try {
+			url = await new Promise<string | undefined>(resolve => {
+				disposables.push(
+					input.onDidHide(() => resolve(undefined)),
+					input.onDidChangeValue(value => {
+						if (value) {
+							try {
+								new URL(value);
+							} catch {
+								input.validationMessage = `Please enter a valid URL`;
+								return;
+							}
+						}
+						input.validationMessage = undefined;
+					}),
+					input.onDidAccept(() => {
+						const value = input.value.trim();
+						if (!value) {
+							input.validationMessage = `Please enter a valid URL`;
+							return;
+						}
+
+						try {
+							new URL(value);
+						} catch {
+							input.validationMessage = `Please enter a valid URL`;
+							return;
+						}
+
+						resolve(value);
+					}),
+				);
+
+				input.title = `Connect to Ollama`;
+				input.placeholder = `Please enter your Ollama server URL to use this feature`;
+				input.prompt = `Enter your Ollama server URL (default: ${defaultBaseUrl})`;
+				input.value = defaultBaseUrl;
+
+				input.show();
+			});
+		} finally {
+			input.dispose();
+			disposables.forEach(d => void d.dispose());
+		}
+
+		if (!url) return defaultBaseUrl;
+
+		void configuration.updateEffective('ai.ollama.url', url);
+
+		return url;
+	}
+
 	private getBaseUrl(): string {
 		// Get base URL from configuration or use default
-		return configuration.get('ai.ollama.url') || 'http://localhost:11434';
+		return configuration.get('ai.ollama.url') || defaultBaseUrl;
 	}
 
 	protected getUrl(_model: AIModel<typeof provider.id>): string {
