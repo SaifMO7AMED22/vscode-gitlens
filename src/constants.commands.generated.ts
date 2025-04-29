@@ -72,6 +72,7 @@ export type ContributedCommands =
 	| 'gitlens.graph.createWorktree'
 	| 'gitlens.graph.deleteBranch'
 	| 'gitlens.graph.deleteTag'
+	| 'gitlens.graph.explainCommit'
 	| 'gitlens.graph.fetch'
 	| 'gitlens.graph.hideLocalBranch'
 	| 'gitlens.graph.hideRefGroup'
