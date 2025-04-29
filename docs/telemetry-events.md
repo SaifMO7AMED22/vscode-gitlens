@@ -1160,7 +1160,7 @@ or
 }
 ```
 
-### home/changeUserDefinedMergeBase
+### home/changeBranchMergeTarget
 
 > Sent when the user starts defining a user-specific merge target branch
 

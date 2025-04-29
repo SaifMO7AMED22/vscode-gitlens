@@ -124,7 +124,7 @@ export class QuickWizardRootStep implements QuickPickStep<QuickCommand> {
 			this.hiddenItems.push(new AssociateIssueWithBranchCommand(container, args));
 		}
 
-		if (args?.command === 'changeUserDefinedMergeBase') {
+		if (args?.command === 'changeBranchMergeTarget') {
 			this.hiddenItems.push(new ChangeUserDefinedMergeBaseCommand(container, args));
 		}
 	}

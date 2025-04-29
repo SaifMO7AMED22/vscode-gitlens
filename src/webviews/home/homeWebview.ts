@@ -334,7 +334,7 @@ export class HomeWebviewProvider implements WebviewProvider<State, State, HomeWe
 				(src?: Source) => this.container.subscription.validate({ force: true }, src),
 				this,
 			),
-			registerCommand('gitlens.home.changeUserDefinedMergeBase', this.changeUserDefinedMergeBase, this),
+			registerCommand('gitlens.home.changeBranchMergeTarget', this.changeBranchMergeTarget, this),
 			registerCommand('gitlens.home.deleteBranchOrWorktree', this.deleteBranchOrWorktree, this),
 			registerCommand('gitlens.home.pushBranch', this.pushBranch, this),
 			registerCommand('gitlens.home.openMergeTargetComparison', this.mergeTargetCompare, this),
@@ -492,11 +492,11 @@ export class HomeWebviewProvider implements WebviewProvider<State, State, HomeWe
 		});
 	}
 
-	@log<HomeWebviewProvider['changeUserDefinedMergeBase']>()
-	private changeUserDefinedMergeBase(ref: BranchAndTargetRefs) {
-		this.container.telemetry.sendEvent('home/changeUserDefinedMergeBase');
-		void executeCommand<ChangeUserDefinedMergeBaseCommandArgs>('gitlens.changeUserDefinedMergeBase', {
-			command: 'changeUserDefinedMergeBase',
+	@log<HomeWebviewProvider['changeBranchMergeTarget']>()
+	private changeBranchMergeTarget(ref: BranchAndTargetRefs) {
+		this.container.telemetry.sendEvent('home/changeBranchMergeTarget');
+		void executeCommand<ChangeUserDefinedMergeBaseCommandArgs>('gitlens.changeBranchMergeTarget', {
+			command: 'changeBranchMergeTarget',
 			state: {
 				repo: ref.repoPath,
 				branch: ref.branchName,

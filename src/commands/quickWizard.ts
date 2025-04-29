@@ -20,7 +20,7 @@ export class QuickWizardCommand extends QuickWizardCommandBase {
 			'gitlens.showLaunchpad',
 			'gitlens.startWork',
 			'gitlens.associateIssueWithBranch',
-			'gitlens.changeUserDefinedMergeBase',
+			'gitlens.changeBranchMergeTarget',
 		]);
 	}
 
@@ -35,8 +35,8 @@ export class QuickWizardCommand extends QuickWizardCommandBase {
 			case 'gitlens.associateIssueWithBranch':
 				return this.execute({ command: 'associateIssueWithBranch', ...args });
 
-			case 'gitlens.changeUserDefinedMergeBase':
-				return this.execute({ command: 'changeUserDefinedMergeBase', ...args });
+			case 'gitlens.changeBranchMergeTarget':
+				return this.execute({ command: 'changeBranchMergeTarget', ...args });
 
 			default:
 				return this.execute(args);

@@ -477,7 +477,7 @@ export class GlMergeTargetStatus extends LitElement {
 		return html`<span class="header__actions"
 			>${branchRef && targetRef
 				? html`<gl-button
-							href="${createCommandLink<BranchAndTargetRefs>('gitlens.home.changeUserDefinedMergeBase', {
+							href="${createCommandLink<BranchAndTargetRefs>('gitlens.home.changeBranchMergeTarget', {
 								...branchRef,
 								mergeTargetId: targetRef.branchId,
 								mergeTargetName: targetRef.branchName,

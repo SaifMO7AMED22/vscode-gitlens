@@ -30,13 +30,13 @@ function assertState(state: PartialStepState<InitialState>): asserts state is St
 }
 
 export interface ChangeUserDefinedMergeBaseCommandArgs {
-	readonly command: 'changeUserDefinedMergeBase';
+	readonly command: 'changeBranchMergeTarget';
 	state?: Partial<InitialState>;
 }
 
 export class ChangeUserDefinedMergeBaseCommand extends QuickCommand {
 	constructor(container: Container, args?: ChangeUserDefinedMergeBaseCommandArgs) {
-		super(container, 'changeUserDefinedMergeBase', 'changeUserDefinedMergeBase', 'Change Merge Target', {
+		super(container, 'changeBranchMergeTarget', 'changeBranchMergeTarget', 'Change Merge Target', {
 			description: 'Change Merge Target for a branch',
 		});
 		let counter = 0;
